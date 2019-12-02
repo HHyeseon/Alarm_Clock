@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Alarm</string>
     <string name="action_remove">Delete</string>
+    <string name="alarm">Alarm</string>
 
 
 </resources>

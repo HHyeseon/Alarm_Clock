@@ -14,7 +14,11 @@ import android.widget.CompoundButton;
 
 import java.util.ArrayList;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {    //err(NotFound)
+
+    LayoutInflater layoutInflater;
+    ArrayList<Item> arrayList =  new ArrayList<Item>();
+    int checkedItemCount = 0;
 
     class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
         TextView textView1, textView2;
@@ -31,8 +35,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
         public void setData(){
             Item item = arrayList.get(getAdapterPosition());
-            textView1.setText(item.getTitle());
-            textView2.setText(item.getCreateTimeFormatted());
+            textView1.setText(String.valueOf(item.getHour()) + ":" + String.valueOf(item.getMinute()));              //err(NotFound)
+
         }
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -47,9 +51,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     }
 
-    LayoutInflater layoutInflater;
-    ArrayList<Item> arrayList;
-    int checkedItemCount = 0;
+
 
     public MyRecyclerViewAdapter(Context context, ArrayList<Item>arrayList){
         this.layoutInflater = LayoutInflater.from(context);
@@ -69,7 +71,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int index){
-        viewHolder.setData();
+        viewHolder.setData();               //err(NotFound)
     }
 
 }

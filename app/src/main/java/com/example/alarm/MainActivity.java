@@ -3,6 +3,7 @@ package com.example.alarm;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -22,6 +24,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import java.util.ArrayList;
+import java.lang.String;
 
 
 public class MainActivity extends AppCompatActivity{
@@ -33,13 +36,15 @@ public class MainActivity extends AppCompatActivity{
 
 
     MyRecyclerViewAdapter myRecyclerViewAdapter;
-    ArrayList<Item> arrayList;
+    ArrayList<Item> arrayList = new ArrayList<Item>();
+  //  ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, arrayList);
         this.context = this;
 
         // 알람매니저 설정
@@ -67,8 +72,11 @@ public class MainActivity extends AppCompatActivity{
 
                 // 시간 가져옴
                 int hour = alarm_timepicker.getHour();
+             //   int hour = calendar.get(Calendar.HOUR_OF_DAY);
                 int minute = alarm_timepicker.getMinute();
+             //   int minute = calendar.get(Calendar.MINUTE);
                 Toast.makeText(MainActivity.this,"Alarm 예정 " + hour + "시 " + minute + "분",Toast.LENGTH_SHORT).show();
+         //       int time = hour + minute;
 
                 // reveiver에 string 값 넘겨주기
                 my_intent.putExtra("state","alarm on");
@@ -77,8 +85,13 @@ public class MainActivity extends AppCompatActivity{
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
                 // 알람셋팅
-                alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        pendingIntent);
+                alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+                //데이터를 목록에 추가
+
+                arrayList.add(new Item(hour, minute));
+                myRecyclerViewAdapter.notifyDataSetChanged();                   //err(NullPointer)
+             //   adapter.notifyDataSetChanged();                                   //err(Runtime)
             }
         });
 
@@ -109,4 +122,5 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
 }

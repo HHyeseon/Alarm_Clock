@@ -39,11 +39,26 @@ public class AlarmList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_list);
-          Bundle extras = getIntent().getExtras();
+
        //     int hour = intent.getExtras().getInt("hour");     //err
        //     int minute = intent.getExtras().getInt("minute");   //err
+        int hour;
+        int minute;
+        try{
+            Bundle extras = getIntent().getExtras();
+            hour = extras.getInt("hour");
+            minute = extras.getInt("minute");
+        } catch(Exception ex) {
+            hour = -1;
+            minute = -1;
+        }
+
+       /*   Bundle extras = getIntent().getExtras();
         int hour = extras.getInt("hour");
         int minute = extras.getInt("minute");
+        */
+
+
 
 
         arrayList = new ArrayList<Item>();

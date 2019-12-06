@@ -92,11 +92,22 @@ public class MainActivity extends AppCompatActivity{
                 //데이터를 목록에 추가
 
        //         Intent intent = new Intent(getBaseContext(),AlarmList.class);
-                Intent intent = new Intent(context,AlarmList.class);
+              //  Intent intent = new Intent(context,AlarmList.class);
+
+             /*
+                Intent intent = new Intent(MainActivity.this,AlarmList.class);
                 intent.putExtra("hour", hour);
                 intent.putExtra("minute", minute);
                 startActivity(intent);
+                */
 
+             Bundle b = new Bundle();
+             b.putInt("hour", hour);
+             b.putInt("minute", minute);
+             Intent intent = new Intent(MainActivity.this,AlarmList.class);
+             intent.putExtra("hour", hour);
+             intent.putExtra("minute", minute);
+             startActivity(intent);
           //      arrayList.add(new Item(hour, minute));
            //     myRecyclerViewAdapter.notifyDataSetChanged();                   //err(NullPointer)
              //   adapter.notifyDataSetChanged();                                   //err(Runtime)

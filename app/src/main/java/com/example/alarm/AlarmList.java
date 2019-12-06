@@ -8,12 +8,15 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import android.widget.TimePicker;
+
 
 
 public class AlarmList extends AppCompatActivity {
@@ -21,8 +24,13 @@ public class AlarmList extends AppCompatActivity {
     MyRecyclerViewAdapter myRecyclerViewAdapter;
     ArrayList<Item> arrayList;
     final Calendar calendar = Calendar.getInstance();
-    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-    int minute = calendar.get(Calendar.MINUTE);
+   // int hour = calendar.get(Calendar.HOUR_OF_DAY);
+   // int minute = calendar.get(Calendar.MINUTE);
+   TimePicker alarm_timepicker;
+
+
+ //   ArrayAdapter<Item> adapter;
+    Intent intent = getIntent();
 
 
 
@@ -31,10 +39,19 @@ public class AlarmList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_list);
+          Bundle extras = getIntent().getExtras();
+       //     int hour = intent.getExtras().getInt("hour");     //err
+       //     int minute = intent.getExtras().getInt("minute");   //err
+        int hour = extras.getInt("hour");
+        int minute = extras.getInt("minute");
+
 
         arrayList = new ArrayList<Item>();
         arrayList.add(new Item(hour, minute));
-        arrayList.add(new Item(hour, minute));
+
+  //      myRecyclerViewAdapter.notifyDataSetChanged();
+
+      //  adapter=new ArrayAdapter<Item>(AlarmList.this, android.R.layout.activity_list_item, arrayList);
 
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, arrayList);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);

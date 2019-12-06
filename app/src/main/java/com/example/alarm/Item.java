@@ -4,8 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Item {
-   // String title;
-   // Date createTime;
+
     int hour;
     int minute;
     boolean checked;
@@ -16,17 +15,6 @@ public class Item {
         this.hour = hour;
         this.minute = minute;
     }
-/*
-    public String getTitle() {
-        return title;
-    }
-*/
-
- /*
-    public Date getCreateTime() {
-        return createTime;
-    }
-    */
 
     public int getHour(){
         return hour;

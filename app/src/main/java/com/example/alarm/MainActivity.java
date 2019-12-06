@@ -26,6 +26,8 @@ import java.util.GregorianCalendar;
 import java.util.ArrayList;
 import java.lang.String;
 
+import android.content.Intent;
+
 
 public class MainActivity extends AppCompatActivity{
 
@@ -74,9 +76,9 @@ public class MainActivity extends AppCompatActivity{
                 int hour = alarm_timepicker.getHour();
              //   int hour = calendar.get(Calendar.HOUR_OF_DAY);
                 int minute = alarm_timepicker.getMinute();
-             //   int minute = calendar.get(Calendar.MINUTE);
+           //     int minute = calendar.get(Calendar.MINUTE);
                 Toast.makeText(MainActivity.this,"Alarm 예정 " + hour + "시 " + minute + "분",Toast.LENGTH_SHORT).show();
-         //       int time = hour + minute;
+
 
                 // reveiver에 string 값 넘겨주기
                 my_intent.putExtra("state","alarm on");
@@ -89,9 +91,17 @@ public class MainActivity extends AppCompatActivity{
 
                 //데이터를 목록에 추가
 
-                arrayList.add(new Item(hour, minute));
-                myRecyclerViewAdapter.notifyDataSetChanged();                   //err(NullPointer)
+       //         Intent intent = new Intent(getBaseContext(),AlarmList.class);
+                Intent intent = new Intent(context,AlarmList.class);
+                intent.putExtra("hour", hour);
+                intent.putExtra("minute", minute);
+                startActivity(intent);
+
+          //      arrayList.add(new Item(hour, minute));
+           //     myRecyclerViewAdapter.notifyDataSetChanged();                   //err(NullPointer)
              //   adapter.notifyDataSetChanged();                                   //err(Runtime)
+
+
             }
         });
 

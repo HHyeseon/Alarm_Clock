@@ -21,13 +21,12 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     int checkedItemCount = 0;
 
     class ViewHolder extends RecyclerView.ViewHolder implements CompoundButton.OnCheckedChangeListener {
-        TextView textView1, textView2;
+        TextView textView1;
         CheckBox checkBox;
 
         public ViewHolder(View view){
             super(view);
             textView1 = view.findViewById(R.id.textView1);
-            textView2 = view.findViewById(R.id.textView2);
             this.checkBox = view.findViewById(R.id.checkBox);
             this.checkBox.setOnCheckedChangeListener(this);
 

@@ -35,8 +35,7 @@ public class MainActivity extends AppCompatActivity{
     TimePicker alarm_timepicker;
     Context context;
     PendingIntent pendingIntent;
-
-    private DbOpenHelper mDbOpenHelper;
+    
     MyRecyclerViewAdapter myRecyclerViewAdapter;
     ArrayList<Item> arrayList = new ArrayList<Item>();
   //  ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
@@ -50,11 +49,6 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, arrayList);
         this.context = this;
-
-
-        mDbOpenHelper = new DbOpenHelper(this);
-        mDbOpenHelper.open();
-        mDbOpenHelper.create();
 
 
         // 알람매니저 설정
@@ -109,8 +103,6 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
                 */
 
-             mDbOpenHelper.open();
-             mDbOpenHelper.insertColumn(hour,minute);
              Bundle b = new Bundle();
              b.putInt("hour", hour);
              b.putInt("minute", minute);

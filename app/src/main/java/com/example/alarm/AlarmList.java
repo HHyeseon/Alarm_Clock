@@ -29,8 +29,11 @@ public class AlarmList extends AppCompatActivity {
    TimePicker alarm_timepicker;
 
 
+
+
+
  //   ArrayAdapter<Item> adapter;
-    Intent intent = getIntent();
+  //  Intent intent = getIntent();
 
 
 
@@ -42,16 +45,35 @@ public class AlarmList extends AppCompatActivity {
 
        //     int hour = intent.getExtras().getInt("hour");     //err
        //     int minute = intent.getExtras().getInt("minute");   //err
+        /*
         int hour;
         int minute;
         try{
             Bundle extras = getIntent().getExtras();
             hour = extras.getInt("hour");
             minute = extras.getInt("minute");
-        } catch(Exception ex) {
+        } catch(Exception e) {
+            hour = 0;
+            minute = 0;
+        }
+*/
+
+
+        int hour;
+        int minute;
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null){
+            hour = bundle.getInt(String.valueOf("hour"));
+            minute = bundle.getInt(String.valueOf("minute"));
+        }
+        else{
             hour = -1;
             minute = -1;
+
         }
+
+
 
        /*   Bundle extras = getIntent().getExtras();
         int hour = extras.getInt("hour");

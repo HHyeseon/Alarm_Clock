@@ -36,10 +36,12 @@ public class MainActivity extends AppCompatActivity{
     Context context;
     PendingIntent pendingIntent;
 
-
+    private DbOpenHelper mDbOpenHelper;
     MyRecyclerViewAdapter myRecyclerViewAdapter;
     ArrayList<Item> arrayList = new ArrayList<Item>();
   //  ArrayAdapter<Item> adapter = new ArrayAdapter<Item>(MainActivity.this, android.R.layout.simple_list_item_1, arrayList);
+
+    Intent intent;
 
 
     @Override
@@ -48,6 +50,12 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         myRecyclerViewAdapter = new MyRecyclerViewAdapter(this, arrayList);
         this.context = this;
+
+
+        mDbOpenHelper = new DbOpenHelper(this);
+        mDbOpenHelper.open();
+        mDbOpenHelper.create();
+
 
         // 알람매니저 설정
         alarm_manager = (AlarmManager) getSystemService(ALARM_SERVICE);
@@ -101,10 +109,12 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
                 */
 
+             mDbOpenHelper.open();
+             mDbOpenHelper.insertColumn(hour,minute);
              Bundle b = new Bundle();
              b.putInt("hour", hour);
              b.putInt("minute", minute);
-             Intent intent = new Intent(MainActivity.this,AlarmList.class);
+             intent = new Intent(MainActivity.this,AlarmList.class);
              intent.putExtra("hour", hour);
              intent.putExtra("minute", minute);
              startActivity(intent);
@@ -138,7 +148,7 @@ public class MainActivity extends AppCompatActivity{
         list.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(getApplicationContext(), AlarmList.class);
+                 intent = new Intent(getApplicationContext(), AlarmList.class);
                 startActivity(intent);
             }
         });
